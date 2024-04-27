@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Drawing;
-
 namespace UniversityApiBackend.Models.DataModels
 {
     public enum Level
@@ -19,5 +17,9 @@ namespace UniversityApiBackend.Models.DataModels
         [Required]
         public string Description { get; set; } = string.Empty;
         public Level Level { get; set; } = Level.Basic;
+
+        //la relacion de entidad, 
+        [Required]
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
     }
 }
