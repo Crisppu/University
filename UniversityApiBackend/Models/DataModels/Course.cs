@@ -18,8 +18,16 @@ namespace UniversityApiBackend.Models.DataModels
         public string Description { get; set; } = string.Empty;
         public Level Level { get; set; } = Level.Basic;
 
-        //la relacion de entidad, 
+        //la relacion de entidad, 1:N ej
         [Required]
         public ICollection<Category> Categories { get; set; } = new List<Category>();
+
+        [Required]
+        public ICollection<Student> Studens { get; set; } = new List<Student>();
+        //la relacion de entidad, 1:1 ej
+
+        [Required]
+        public Chapter Chaper { get; set; } = new Chapter();
+
     }
 }
