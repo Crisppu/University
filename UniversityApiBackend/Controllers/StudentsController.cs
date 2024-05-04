@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniversityApiBackend.DataAccess;
 using UniversityApiBackend.Models.DataModels;
+using UniversityApiBackend.Services;
 
 namespace UniversityApiBackend.Controllers
 {
@@ -15,10 +16,12 @@ namespace UniversityApiBackend.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly UniversityDBContext _context;
+        private readonly IStudentsServices _studentsServices;//paso1
 
-        public StudentsController(UniversityDBContext context)
+        public StudentsController(UniversityDBContext context, IStudentsServices studentsServices)
         {
             _context = context;
+            _studentsServices = studentsServices;//paso2 despues de esto ya podemos hacer uso de sus funcionalidades
         }
 
         // GET: api/Students
@@ -33,6 +36,7 @@ namespace UniversityApiBackend.Controllers
         public async Task<ActionResult<Student>> GetStudent(int id)
         {
             var student = await _context.Student.FindAsync(id);
+            _studentsServices.GetStudentsWithNoCourses(); //como por ejemplo esta confionalizadad
 
             if (student == null)
             {
