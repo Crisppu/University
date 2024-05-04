@@ -1,6 +1,7 @@
 //1- usos para trabajar con EntidadFranwork
 using Microsoft.EntityFrameworkCore;
 using UniversityApiBackend.DataAccess;
+using UniversityApiBackend.Services;
 
 var builder = WebApplication.CreateBuilder(args);//codigo generado del proyecto
 //2- conexion con Sql server
@@ -14,6 +15,11 @@ builder.Services.AddDbContext<UniversityDBContext>(option => option.UseSqlServer
 // Add services to the container.
 
 builder.Services.AddControllers();
+//4. Add Custom Services (folder Services) - Agregar servicios personalizados (carpeta Servicios)
+builder.Services.AddScoped<IStudentsServices, StudensService>();
+/*TODO: Add the rest of services
+aqui todos los controles como por ejemplo Studen
+ */
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
