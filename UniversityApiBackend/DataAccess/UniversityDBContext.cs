@@ -11,5 +11,7 @@ namespace UniversityApiBackend.DataAccess
         public DbSet<Category>? Categories { get; set; }
 
         public DbSet<Chapter>? Chapters { get; set; }
+        //variable se modificara esto se puso por defecto
+        public DbSet<UniversityApiBackend.Models.DataModels.Student> Student { get; set; } = default!;
     }
 }
