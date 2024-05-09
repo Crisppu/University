@@ -199,6 +199,11 @@ namespace LinqSnippets
             var takeWhileSmallerThan4 = myList.TakeWhile(num => num < 4); //{1,2,3}
         }
         //Paging with Skip and Take
+        //RAZON IENUMERABLE
+        /*
+         * Esto permite que tu clase sea compatible con una variedad de constructores de lenguaje de C#, 
+         * como foreach, LINQ y otros métodos de extensión que operan sobre secuencias.
+         */
         static public IEnumerable<T> GetPage<T>(IEnumerable<T> collection, int pageNumber, int resultsPerPage)
         {
             int starIndex = (pageNumber - 1) * resultsPerPage;
