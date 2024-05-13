@@ -1,5 +1,6 @@
 //1- usos para trabajar con EntidadFranwork
 using Microsoft.EntityFrameworkCore;
+using UniversityApiBackend;
 using UniversityApiBackend.DataAccess;
 using UniversityApiBackend.Services;
 
@@ -11,9 +12,10 @@ var connectionString = builder.Configuration.GetConnectionString(CONNECTIONNAME)
 //3- add contexto a los servicios de buider
 //builder.Services.AddDbContext<UniversityDBContext1>(option => option.UseSqlServer(connectionString));
 builder.Services.AddDbContext<UniversityDBContext>(option => option.UseSqlServer(connectionString));
+//aqui va el 7 - Add Service of JWT Autorization
+builder.Services.AddJwtTokenServices(builder.Configuration);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
 //4. Add Custom Services (folder Services) - Agregar servicios personalizados (carpeta Servicios)
 builder.Services.AddScoped<IStudentsServices, StudensService>();
@@ -22,6 +24,7 @@ aqui todos los controles como por ejemplo Studen
  */
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+//8. todo: configurar Swagger para encargarse de la autorización de JWT
 builder.Services.AddSwaggerGen();
 //5. habilitar el CORS, configurar
 builder.Services.AddCors(options =>

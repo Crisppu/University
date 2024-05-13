@@ -38,6 +38,7 @@ namespace UniversityApiBackend.Helpers
         public static UserTokens GetTokenKey(UserTokens model,JwtSettings jwtSettings) {
             try
             {
+                Console.WriteLine(model);
                 var userToken = new UserTokens();
                 if (model == null)
                 {
@@ -45,8 +46,9 @@ namespace UniversityApiBackend.Helpers
                 }
                 //obtain SECRET KEY - clave secreta
                 var key = System.Text.Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
-                
+                Console.WriteLine(key);
                 Guid Id;
+                
                 //el tiempo que expira es de un dia
                 DateTime expireTime = DateTime.UtcNow.AddDays(1);
                 //validar of out token - verificar cuanto tiene de valides el token
@@ -65,9 +67,13 @@ namespace UniversityApiBackend.Helpers
                         
                         );
                 userToken.Token = new JwtSecurityTokenHandler().WriteToken(jwToken);
+                Console.WriteLine(userToken.Token);
                 userToken.UserName = model.UserName;
                 userToken.Id = model.Id;
                 userToken.GuidId = Id;
+
+                
+
                 return userToken;
 
             }catch (Exception ex)
