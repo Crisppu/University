@@ -9,12 +9,14 @@ namespace UniversityApiBackend
         public static void AddJwtTokenServices(this IServiceCollection Services, IConfiguration Configuration) {
             //Add JWT Settings
             var bindJwtSettings = new JwtSettings(); // modelo de JwtSettings.cs
+            //traeremos el bloque "JsonWebTokenKeys" de configuracion desde el archivo appsettings.cs
             Configuration.Bind("JsonWebTokenKeys",bindJwtSettings);
 
             //add Singleton of JWT Settings
             Services.AddSingleton(bindJwtSettings);
 
-            Services.AddAuthentication(
+            Services
+                .AddAuthentication(
                 options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;//nuesta app utilizara un sistema de autinicacion JWT - autenticar usuarios
@@ -36,7 +38,7 @@ namespace UniversityApiBackend
                             ValidAudience = bindJwtSettings.ValidAudience,
                             RequireExpirationTime = bindJwtSettings.RequireExpirationTime,
                             ValidateLifetime = bindJwtSettings.ValidateLifetime,
-                            ClockSkew = TimeSpan.FromDays(1)
+                            ClockSkew = TimeSpan.FromDays(1) //establece el margen de tiempo permitido para la sincronización entre el reloj del servidor y el reloj del emisor del token en un día (24 horas).
 
 
                         };

@@ -37,8 +37,6 @@ namespace UniversityApiBackend.Controllers
         [HttpPost]
         public IActionResult GetToken(UserLogins userLogins)
         {
-            Console.WriteLine(userLogins.ToString());
-            Console.WriteLine(userLogins);
             try
             {
                 var Token = new UserTokens();
