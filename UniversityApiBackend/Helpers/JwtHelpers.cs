@@ -8,7 +8,7 @@ namespace UniversityApiBackend.Helpers
     //JSON Web Token - Jwt
     public static class JwtHelpers //static para que no se pueda hacer nada con este archivo
     {
-        public static IEnumerable<Claim> GetClaims(this UserTokens userAccounts, Guid Id)
+        public static IEnumerable<Claim> GetClaims(UserTokens userAccounts, Guid Id)
         {
             List<Claim> claims= new List<Claim>
             {
@@ -23,22 +23,22 @@ namespace UniversityApiBackend.Helpers
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
 
             }
-            else if(userAccounts.UserName == "User 1")
+            else if(userAccounts.UserName == "User1")
             {
                 claims.Add(new Claim(ClaimTypes.Role,"User"));
                 claims.Add(new Claim("UserOnly","User 1"));
             }
             return claims;
         }
-        public static IEnumerable<Claim> GetClaims(this UserTokens userTokens, out Guid Id)
+        public static IEnumerable<Claim> GetClaims( UserTokens userTokens, out Guid Id)
         {
             Id = Guid.NewGuid(); //genera un nuevo id
             return GetClaims(userTokens,Id);
         }
         public static UserTokens GetTokenKey(UserTokens model,JwtSettings jwtSettings) {
+            // jwtSettings recibe los valores de appsetting.json - JsonWebTokenKeys
             try
             {
-                Console.WriteLine(model);
                 var userToken = new UserTokens();
                 if (model == null)
                 {
@@ -46,7 +46,6 @@ namespace UniversityApiBackend.Helpers
                 }
                 //obtain SECRET KEY - clave secreta
                 var key = System.Text.Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
-                Console.WriteLine(key);
                 Guid Id;
                 
                 //el tiempo que expira es de un dia
@@ -67,12 +66,10 @@ namespace UniversityApiBackend.Helpers
                         
                         );
                 userToken.Token = new JwtSecurityTokenHandler().WriteToken(jwToken);
-                Console.WriteLine(userToken.Token);
+                //Console.WriteLine(userToken.Token);
                 userToken.UserName = model.UserName;
                 userToken.Id = model.Id;
                 userToken.GuidId = Id;
-
-                
 
                 return userToken;
 

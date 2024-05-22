@@ -13,10 +13,11 @@ namespace UniversityApiBackend.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly JwtSettings _jwtSettings;
+        private readonly JwtSettings _jwtSettings; //con readonly le estamos diciendo que solo podemos acceder una ves
+        //constructor
         public AccountController(JwtSettings jwtSettings)
         {
-            _jwtSettings= jwtSettings;
+            _jwtSettings = jwtSettings;
         }
         private IEnumerable<User> Logins = new List<User>()
         {
@@ -29,7 +30,7 @@ namespace UniversityApiBackend.Controllers
             new User() {
                 Id = 2,
                 Email = "criyat2@gmail.com",
-                Name = "User2",
+                Name = "User1",
                 Password = "pepe"
             }
         };
@@ -53,7 +54,7 @@ namespace UniversityApiBackend.Controllers
                         Id = user.Id,
                         GuidId = Guid.NewGuid()
                     }, _jwtSettings);
-
+                    
 
                 }
                 else
@@ -69,7 +70,7 @@ namespace UniversityApiBackend.Controllers
             }
         }
         [HttpGet]
-        [Authorize(AuthenticationSchemes =  JwtBearerDefaults.AuthenticationScheme, Roles ="Administrator")]
+        [Authorize(AuthenticationSchemes =  JwtBearerDefaults.AuthenticationScheme, Roles ="Administrator")] // se add "Administrator" porque el archivo JwtHelpers.cs se valido asi
         public IActionResult GetUserList()
         {
             return Ok(Logins);

@@ -13,6 +13,19 @@ namespace UniversityApiBackend
             Configuration.Bind("JsonWebTokenKeys",bindJwtSettings);
 
             //add Singleton of JWT Settings
+            // Una única instancia del servicio es creada y utilizada durante toda la vida de la aplicación.
+            /*
+                eso significa que tendre acceso a los valos de appsentting.json - JsonWebTokenKeys
+                y en los controllers se accedemos a los valores de esta forma
+            private readonly JwtSettings _jwtSettings; //con readonly le estamos diciendo que solo podemos acceder una ves
+            //constructor
+             public AccountController(JwtSettings jwtSettings)
+            {
+            _jwtSettings = jwtSettings;
+            *********
+            *hacer un Console.WriteLine(_jwtSettings)
+
+            */
             Services.AddSingleton(bindJwtSettings);
 
             Services
