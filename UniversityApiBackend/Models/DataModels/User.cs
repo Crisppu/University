@@ -15,6 +15,9 @@ namespace UniversityApiBackend.Models.DataModels
 
         [Required]
         public string Password { get; set; } = string.Empty;
+        
+        //TODO: pendiente-necesario quedara pendiente modificar esta clase y agregar el rol y hacer los 
+        //cambios necesarios en el proyecto
 
 
     }
