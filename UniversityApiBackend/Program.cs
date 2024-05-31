@@ -31,6 +31,7 @@ builder.Services.AddAuthorization(option =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 //8. todo: configurar Swagger para encargarse de la autorización de JWT
+//muestra el boton en Swagger authorize
 builder.Services.AddSwaggerGen(options =>
 //con esta cnfiguracion swagger solicite un token cuando estemos solicitando entrar a la rutas protejidas
 {
