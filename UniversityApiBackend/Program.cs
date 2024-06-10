@@ -9,10 +9,11 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);//codigo generado del proyecto
 //11 configuracion serilog //le estamos diciendo tanto como consolo y debug
-builder.Host.UseSerilog((host,logger) => { 
-    logger.WriteTo.Console() //con esto le estamos diciendo que se escriba en la consola
+builder.Host.UseSerilog((hostBuilderCtx,loggerConf) => { 
+    loggerConf
+    .WriteTo.Console() //con esto le estamos diciendo que se escriba en la consola
     .WriteTo.Debug() //tambien queremos que se escriba en debug
-    .ReadFrom.Configuration(host.Configuration); //archivo de configuracion
+    .ReadFrom.Configuration(hostBuilderCtx.Configuration); //archivo de configuracion
 
 });
 //2- conexion con Sql server
