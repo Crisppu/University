@@ -24,6 +24,8 @@ namespace UniversityApiBackend.Controllers
         //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public IEnumerable<WeatherForecast> Get()
         {
+            //_logger.LogTrace($"{nameof(NOMBRE DEL CONTROLADOR)} - {nameof(NOMBRE DE LA FUNCION)} - MENSAJE");
+
             _logger.LogTrace($"{nameof(WeatherForecastController)} - {nameof(Get)} - Trace Level Log");
             _logger.LogDebug($"{nameof(WeatherForecastController)} - {nameof(Get)} - Debug Level Log");
             _logger.LogInformation($"{nameof(WeatherForecastController)} - {nameof(Get)} - Information Level Log");
