@@ -8,12 +8,21 @@ using UniversityApiBackend.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);//codigo generado del proyecto
+
+
 //11 configuracion serilog //le estamos diciendo tanto como consolo y debug
+/* 11-mensaje - dentro de esta configuracion de UseSerilog , el appsetting.json lo manda a llamar implicitamente
+ *  HostBuilderContext
+Configuration: Proporciona acceso a la configuración de la aplicación. Esto incluye configuraciones cargadas desde archivos como appsettings.json, variables de entorno, argumentos de línea de comandos, etc.
+HostingEnvironment: Proporciona información sobre el entorno de hospedaje, como el nombre del entorno (desarrollo, producción, etc.).
+Properties: Un diccionario que permite compartir datos entre las diferentes fases de configuración del host.
+ */
 builder.Host.UseSerilog((hostBuilderCtx,loggerConf) => { 
     loggerConf
     .WriteTo.Console() //con esto le estamos diciendo que se escriba en la consola
     .WriteTo.Debug() //tambien queremos que se escriba en debug
-    .ReadFrom.Configuration(hostBuilderCtx.Configuration); //archivo de configuracion
+    .ReadFrom.Configuration(hostBuilderCtx.Configuration); //archivo de configuracion appsettings.json -> "SeriLog"
+    //.ReadFrom.Configuration(hostBuilderCtx.Configuration.GetSection("LoggingSettings")); si dentro del appsetting le cambiara el nombre "SeriLog" a "LoggingSettings" quedariia de esta manera
 
 });
 //2- conexion con Sql server
