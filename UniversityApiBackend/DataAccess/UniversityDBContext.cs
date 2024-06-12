@@ -29,16 +29,22 @@ namespace UniversityApiBackend.DataAccess
             /*ejemplo cada vez que se hace una lectura de 1000 estudiantes(cualquier tabla) se aria un console por cada una*/
             /*Persisitir absolutamento todo*/
             /*estas instrucciones lo que nos permite es que cuando se modifique calquier tabla o midficacion de la base de datos siempre percistira osea cuardara informacion del cambio*/
-            optionsBuilder.LogTo(d => logger.Log(LogLevel.Information,d, new[] {DbLoggerCategory.Database.Name })); //*donde queremos registrar nuestro contenido, donde se presistira el contenido*/
+           optionsBuilder.LogTo(d => logger.Log(LogLevel.Information,d, new[] {DbLoggerCategory.Database.Name })); //*donde queremos registrar nuestro contenido, donde se presistira el contenido*/
             optionsBuilder.EnableSensitiveDataLogging();            /*habilita a la app informacion, datos, menssages , excepciones*/
 
             /*Configuracion personalizada - filtrar solo los que son de nivel infomation*/
 
             /*esta configuracion es para Guardar los cambios, modificaciones */
-            optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }), LogLevel.Information)
+            /*optionsBuilder.LogTo(d => logger.Log(LogLevel.Information, d, new[] { DbLoggerCategory.Database.Name }), LogLevel.Information)
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors(); //nos seniala los errores
-
+            */
         }
+
+        /*TODO- OnModelCreating() -investigar
+         En OnModelCreating, se configura la relación uno a muchos entre Categoria y Producto usando HasOne, WithMany, y HasForeignKey.
+         Se configuran restricciones adicionales como longitud máxima y tipos de datos para las propiedades.
+         
+         */
     }
 }
